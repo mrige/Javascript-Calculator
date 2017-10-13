@@ -8,7 +8,7 @@ var subPressed = false;
 var prevPressed = "";
 
 function display(id){
-    //if(opPressed == false)
+    
     const val = document.getElementById(id).value;
     var negate = 1;
     inputval = inputval + val;
