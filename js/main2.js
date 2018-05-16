@@ -105,6 +105,29 @@ function subtract(){
     display("minus");
 }
 
+function multiply(){
+    op_pressed = true;
+    if(digit_list.length == 2){
+        result = digit_list.shift();
+        result = chooseOp(result, digit_list.pop());
+        digit_list = [];
+        digit_list.push(result);
+    }
+    op = "*";
+    display("multiply");
+}
+
+function divide(){
+    op_pressed = true;
+    if(digit_list.length == 2){
+        result = digit_list.shift();
+        result = chooseOp(result, digit_list.pop());
+        digit_list = [];
+        digit_list.push(result);
+    }
+    op = "/";
+    display("divide");
+}
 
 
 function chooseOp(a,b){
@@ -114,6 +137,9 @@ function chooseOp(a,b){
     }
     else if(op == "-"){
         ans = a - b;
+    }
+    else if(op == "*"){
+        ans = a*b;
     }
     return ans;
 }
