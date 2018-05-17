@@ -27,7 +27,7 @@ function reset(){
 
 function display(id){
     
-    const number = document.getElementById(id).value;
+    var number = document.getElementById(id).value;
     
     if(counter == 0 && is_negative== true){
         number *= -1;
@@ -51,17 +51,12 @@ function display(id){
             if(num_digits > 0){
                 var m  = digit_list.pop();
                 num_digits++;
-
             }
         }
-        
-        
         digit_list.push(parseFloat(input_val));
-
-        
     }
     
-    if(counter != 1 ){
+    if(counter != 1 || is_negative == true ){
         output_val = digit_list.pop();
         digit_list.push(output_val);
         document.getElementById("nameinput").value = output_val+"";
@@ -79,6 +74,9 @@ function display(id){
     
 }
 
+
+
+
 function add(){
     op_pressed = true;
     if(digit_list.length == 2){
@@ -91,6 +89,9 @@ function add(){
     op = "+";
     display("plus");
 }
+
+
+
 
 function subtract(){
     is_negative = true;
@@ -105,6 +106,9 @@ function subtract(){
     display("minus");
 }
 
+
+
+
 function multiply(){
     op_pressed = true;
     if(digit_list.length == 2){
@@ -116,6 +120,8 @@ function multiply(){
     op = "*";
     display("multiply");
 }
+
+
 
 function divide(){
     op_pressed = true;
@@ -130,6 +136,29 @@ function divide(){
 }
 
 
+
+function equals(){
+    op_pressed = true;
+    if(digit_list.length == 2){
+        result = digit_list.shift();
+        result = chooseOp(result, digit_list.pop());
+        digit_list = [];
+        digit_list.push(result);
+    }
+    op = "=";
+    display("equals");
+}
+
+function signSwitch(){
+    //const curr = document.getElementById("nameinput");
+    op_pressed = true;
+    is_negative = true;
+    var val =  digit_list.pop();
+    val *= -1;
+    digit_list.push(val);
+    display("plusminus");
+}
+
 function chooseOp(a,b){
     var ans = 0;
     if(op == "+"){
@@ -141,5 +170,12 @@ function chooseOp(a,b){
     else if(op == "*"){
         ans = a*b;
     }
+    else if(op == "/"){
+        ans = a/b
+    }
+    else if (op == "+/-"){
+        ans = result* -1;
+    }
+    
     return ans;
 }
