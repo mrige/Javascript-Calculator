@@ -5,6 +5,7 @@ var digit_list = [];
 var op = "";
 var op_pressed = false;
 var is_negative = false;
+var percent_pressed = false;
 var debug = true;
 var result = 0;
 var counter = 0;
@@ -21,6 +22,7 @@ function reset(){
     digit_list=[];
     op_pressed = false;
     is_negative= false;
+    percent_pressed = false;
     document.getElementById("nameinput").value= input_val;
     console.clear();
 }
@@ -56,10 +58,11 @@ function display(id){
         digit_list.push(parseFloat(input_val));
     }
     
-    if(counter != 1 || is_negative == true ){
+    if(counter != 1 || is_negative == true || percent_pressed == true){
         output_val = digit_list.pop();
         digit_list.push(output_val);
         document.getElementById("nameinput").value = output_val+"";
+        percent_pressed = false;
     }
     
     if(debug == true){
@@ -150,13 +153,23 @@ function equals(){
 }
 
 function signSwitch(){
-    //const curr = document.getElementById("nameinput");
     op_pressed = true;
     is_negative = true;
     var val =  digit_list.pop();
     val *= -1;
     digit_list.push(val);
     display("plusminus");
+}
+
+function percentage(){
+    
+    op_pressed = true;
+    percent_pressed = true;
+    var val = digit_list.pop();
+    val = val/100;
+    digit_list.push(val);
+    display("percent");
+    
 }
 
 function chooseOp(a,b){
